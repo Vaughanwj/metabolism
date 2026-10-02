@@ -92,6 +92,8 @@ export interface RunResult {
   series: TimeSeries[];
   flowTotals: Record<string, number>;
   citations: Citation[];
+  /** What the model leaves out or simplifies; shown beside every chart. */
+  limitations: string[];
 }
 
 export interface Comparison {

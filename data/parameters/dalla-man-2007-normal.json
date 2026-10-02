@@ -1,0 +1,580 @@
+{
+  "id": "dalla-man-2007-normal",
+  "engineId": "dalla-man-2007",
+  "name": "Dalla Man 2007, average normal subject",
+  "note": "Units are as understood from the model structure and must be checked against the paper. verifiedBy is empty until Vaughan checks each value against BioModels.",
+  "parameters": [
+    {
+      "id": "V_G",
+      "value": 1.88,
+      "unit": "dL/kg",
+      "description": "Glucose distribution volume",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter V_G",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "k_1",
+      "value": 0.065,
+      "unit": "1/min",
+      "description": "Glucose transfer, plasma to tissue",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter k_1",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "k_2",
+      "value": 0.079,
+      "unit": "1/min",
+      "description": "Glucose transfer, tissue to plasma",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter k_2",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "G_b",
+      "value": 95.0,
+      "unit": "mg/dL",
+      "description": "Basal plasma glucose",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter G_b",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "V_I",
+      "value": 0.05,
+      "unit": "L/kg",
+      "description": "Insulin distribution volume",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter V_I",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "m_1",
+      "value": 0.19,
+      "unit": "1/min",
+      "description": "Insulin transfer, liver to plasma",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter m_1",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "m_2",
+      "value": 0.484,
+      "unit": "1/min",
+      "description": "Insulin transfer, plasma to liver",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter m_2",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "m_4",
+      "value": 0.194,
+      "unit": "1/min",
+      "description": "Peripheral insulin degradation",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter m_4",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "m_5",
+      "value": 0.0304,
+      "unit": "min·kg/pmol",
+      "description": "Hepatic extraction dependence on secretion",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter m_5",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "m_6",
+      "value": 0.6471,
+      "unit": "dimensionless",
+      "description": "Hepatic extraction intercept",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter m_6",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "I_b",
+      "value": 25.0,
+      "unit": "pmol/L",
+      "description": "Basal plasma insulin",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter I_b",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "S_b",
+      "value": 1.8,
+      "unit": "pmol/kg/min",
+      "description": "Basal insulin secretion",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter S_b",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "k_max",
+      "value": 0.0558,
+      "unit": "1/min",
+      "description": "Maximum gastric emptying rate",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter k_max",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "k_min",
+      "value": 0.008,
+      "unit": "1/min",
+      "description": "Minimum gastric emptying rate",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter k_min",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "k_abs",
+      "value": 0.057,
+      "unit": "1/min",
+      "description": "Intestinal absorption rate",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter k_abs",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "k_gri",
+      "value": 0.0558,
+      "unit": "1/min",
+      "description": "Grinding rate, solid to liquid stomach",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter k_gri",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "f",
+      "value": 0.9,
+      "unit": "dimensionless",
+      "description": "Fraction of intestinal absorption appearing in plasma",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter f",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "b",
+      "value": 0.82,
+      "unit": "dimensionless",
+      "description": "Emptying curve breakpoint b (fraction of dose)",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter b",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "d",
+      "value": 0.01,
+      "unit": "dimensionless",
+      "description": "Emptying curve breakpoint d (fraction of dose)",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter d",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "BW",
+      "value": 78.0,
+      "unit": "kg",
+      "description": "Body weight of the average subject",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter BW",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "k_p1",
+      "value": 2.7,
+      "unit": "mg/kg/min",
+      "description": "Extrapolated EGP at zero glucose and insulin",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter k_p1",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "k_p2",
+      "value": 0.0021,
+      "unit": "1/min",
+      "description": "Liver glucose effectiveness",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter k_p2",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "k_p3",
+      "value": 0.009,
+      "unit": "mg/kg/min per pmol/L",
+      "description": "Insulin action on the liver",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter k_p3",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "k_p4",
+      "value": 0.0618,
+      "unit": "mg/kg/min per pmol/kg",
+      "description": "Portal insulin action on the liver",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter k_p4",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "k_i",
+      "value": 0.0079,
+      "unit": "1/min",
+      "description": "Delay between insulin signal and action on the liver",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter k_i",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "U_ii",
+      "value": 1.0,
+      "unit": "mg/kg/min",
+      "description": "Insulin-independent glucose use (brain, red cells)",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter U_ii",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "V_m0",
+      "value": 2.5,
+      "unit": "mg/kg/min",
+      "description": "Basal maximum insulin-dependent uptake",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter V_m0",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "V_mX",
+      "value": 0.047,
+      "unit": "mg/kg/min per pmol/L",
+      "description": "Insulin action on peripheral uptake",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter V_mX",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "K_m0",
+      "value": 225.59,
+      "unit": "mg/kg",
+      "description": "Michaelis-Menten constant for uptake",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter K_m0",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "p_2U",
+      "value": 0.0331,
+      "unit": "1/min",
+      "description": "Rate of insulin action on peripheral uptake",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter p_2U",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "part",
+      "value": 0.2,
+      "unit": "dimensionless",
+      "description": "Scaling of insulin-dependent uptake by (1 - part); appears in the SBML, not known from the paper",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter part",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "K",
+      "value": 2.3,
+      "unit": "pmol/kg per mg/dL",
+      "description": "Pancreatic responsivity to rate of glucose change",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter K",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "alpha",
+      "value": 0.05,
+      "unit": "1/min",
+      "description": "Delay between glucose signal and insulin secretion",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter alpha",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "beta",
+      "value": 0.11,
+      "unit": "pmol/kg/min per mg/dL",
+      "description": "Pancreatic responsivity to glucose",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter beta",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "gamma",
+      "value": 0.5,
+      "unit": "1/min",
+      "description": "Transfer rate, portal vein to liver",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML parameter gamma",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "G_p0",
+      "value": 178.0,
+      "unit": "mg/kg",
+      "description": "Initial plasma glucose mass",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML species G_p initial amount",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "G_t0",
+      "value": 135.0,
+      "unit": "mg/kg",
+      "description": "Initial tissue glucose mass",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML species G_t initial amount",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "I_l0",
+      "value": 4.5,
+      "unit": "pmol/kg",
+      "description": "Initial liver insulin mass",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML species I_l initial amount",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "I_p0",
+      "value": 1.25,
+      "unit": "pmol/kg",
+      "description": "Initial plasma insulin mass",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML species I_p initial amount",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "I_10",
+      "value": 25.0,
+      "unit": "pmol/L",
+      "description": "Initial delayed insulin signal, first compartment",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML species I_1 initial amount",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "I_d0",
+      "value": 25.0,
+      "unit": "pmol/L",
+      "description": "Initial delayed insulin signal",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML species I_d initial amount",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "X0",
+      "value": 0.0,
+      "unit": "pmol/L",
+      "description": "Initial insulin action on peripheral uptake",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML species X initial amount",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "I_po0",
+      "value": 3.6,
+      "unit": "pmol/kg",
+      "description": "Initial portal vein insulin",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML species I_po initial amount",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "Y0",
+      "value": 0.0,
+      "unit": "pmol/kg/min",
+      "description": "Initial secretion above basal",
+      "citation": {
+        "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
+        "locator": "SBML species Y initial amount",
+        "url": "https://biomodels.org/BIOMD0000000379",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    }
+  ]
+}

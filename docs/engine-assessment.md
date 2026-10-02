@@ -10,7 +10,8 @@ Oct 1, 2026. Prepared for milestone 2 of the build spec ([spec-v2.md](spec-v2.md
 | --- | --- | --- |
 | Dalla Man, Rizza, Cobelli 2007 meal model | **Adopt as the meal-scale engine** | Simulates glucose and insulin after a meal in normal subjects; insulin sensitivity is adjustable; a curated machine-readable version exists for cross-checking |
 | Bergman minimal model 1979 | **Do not use as an engine** | Built for the IV glucose tolerance test and takes measured insulin as an input, so it cannot simulate a meal on its own. Keep it as the teaching concept behind "insulin sensitivity" |
-| Dalla Man, Breton, Cobelli 2009 exercise extension | **Decision needed** | Adds physical activity but was built and tested for type 1 diabetes |
+| Dalla Man, Breton, Cobelli 2009 exercise extension | **Do not use** | Built and tested only for type 1 diabetes |
+| Exercise models for healthy subjects (Romeres 2021, Frank 2021, Roy and Parker 2007) | **Decision needed** | Each was built on non-diabetic subjects, but none is a published extension of the Dalla Man meal model. See "Exercise: models built on healthy subjects" |
 | Hall et al. 2011 body weight model | **Adopt as the energy-scale engine** | Equations confirmed; models glycogen with its water and extracellular fluid, so the scale-jump lesson is possible |
 
 ## Which presets the engines can support
@@ -19,7 +20,7 @@ Oct 1, 2026. Prepared for milestone 2 of the build spec ([spec-v2.md](spec-v2.md
 | --- | --- | --- |
 | Same calories, different fuel | **No, as written** | The meal model's input is grams of carbohydrate only. Protein and fat do not enter the model. Showing them would mean inventing effects |
 | The resistant machine | **Yes** | Dalla Man model; insulin sensitivity is a parameter. A type 2 diabetes parameter set is in the 2007 paper (not yet read) |
-| Walk it off | **Only by extrapolation** | The only candidate exercise model is a type 1 diabetes model, driven by heart rate |
+| Walk it off | **Partly** | Healthy-subject exercise effects exist, but combining them with the meal model is our own step, not a published one. See the exercise section |
 | Deficit size | **Yes** | Hall model; validation included a 30-day fast in obese subjects, which supports the "honest about extremes" requirement |
 | The scale jump | **Yes** | Hall model includes glycogen (with about 2.7 g water per g) and sodium-driven extracellular fluid |
 
@@ -65,6 +66,17 @@ The parameters were fitted to mean data from a large group of normal subjects wh
 - BioModels' licence for curated models still needs to be confirmed. I believe it is CC0.
 - The GIM software is available to academic institutions on request only. We don't need it.
 
+**Where the curated SBML may differ from the paper.** These points come from memory of the paper and are unconfirmed without the full text. The engine follows the SBML and lists each one in every run's `limitations`.
+- **Renal excretion** is fixed at zero. The paper has a threshold form, k_e1 · (G_p − k_e2) above k_e2 = 339 mg/kg, which corresponds to plasma glucose of about 180 mg/dL. The normal 78 g meal peaks at about 164 mg/dL, so this makes no difference for normal-subject presets. It would matter for the type 2 diabetes set.
+- **Insulin secretion** has no piecewise conditions. In the paper, the rate-of-change term applies only while glucose is rising, and Y has a floor below basal. This affects the late phase after a meal, when glucose dips below basal.
+- **Insulin-dependent uptake** is scaled by (1 − part), with part = 0.2. That factor doesn't match anything I remember from the paper. One side effect is that tissue glucose isn't exactly at steady state at t = 0, so a no-meal run drifts by about 1 mg/dL over 7 hours.
+- **The emptying equation divides by meal size**, so it is undefined before the first meal. The engine uses k_max there; the stomach is empty, so the choice has no effect.
+
+**Implementation (milestone 2).**
+- `src/core/simulation/engines/dallaMan2007.ts` implements the model with fixed-step RK4. The default step is 0.1 min.
+- The tests reproduce an independent libroadrunner run of the same SBML for 78 g and 45 g meals, matching to within 1e-5 relative. The fixture generator is `scripts/make_dm2007_fixtures.py`.
+- A convergence test checks that halving the step changes glucose by less than 1e-6 mg/dL.
+
 **Reproduction test (spec requirement).** The published single-meal figure for normal subjects is the regression target. Running the SBML model in an independent solver gives a second cross-check while the paper figure is being digitized.
 
 ## Bergman minimal model 1979
@@ -88,12 +100,38 @@ The selected variant ("Model C") has α = 3×10⁻⁴, β = 0.01 bpm⁻¹, γ = 
 
 **Problem.** It was tested only in silico on simulated type 1 diabetes subjects, whose insulin comes from injection rather than the pancreas. Grafting it onto the normal-subject meal model would be an extrapolation, and the spec says to refuse those.
 
-**Options**
-1. Adopt it, labeled as extrapolated.
-2. Search for an exercise model validated in non-diabetic subjects.
-3. Defer "Walk it off."
+## Exercise: models built on healthy subjects
 
-My recommendation is option 2, falling back to 3.
+Found after the search requested on Oct 1, 2026.
+
+**Romeres D, Schiavon M, Basu A, Cobelli C, Basu R, Dalla Man C. 2021.** Exercise effect on insulin-dependent and insulin-independent glucose utilization in healthy individuals and individuals with type 1 diabetes: a modeling study. *Am J Physiol Endocrinol Metab* 321(1):E122-E129 ([PMC8321821](https://pmc.ncbi.nlm.nih.gov/articles/PMC8321821/)).
+- From the same Padova group as the meal model. It splits the exercise effect into the same two parts the meal model's glucose use is built from: insulin-independent and insulin-dependent.
+- 6 healthy subjects, 65% VO₂max for 60 min, during a fasting clamp. There was no meal.
+- In healthy subjects, insulin-independent use rose by about 67–97% and insulin-dependent use by about 10–40%. The insulin-independent effect was immediate; the insulin-dependent one was delayed.
+- Its base is the hot glucose minimal model, not the meal model, and endogenous glucose production is treated as a known input.
+
+**Frank S, Jbaily A, Hinshaw L, Basu R, Basu A, Szeri AJ. 2021.** Modeling the acute effects of exercise on glucose dynamics in healthy nondiabetic subjects. *J Pharmacokinet Pharmacodyn* 48(2):225-239 ([PMC8281614](https://pmc.ncbi.nlm.nih.gov/articles/PMC8281614/)).
+- Healthy subjects after a **mixed meal**: 12 resting and 12 exercising, with tracer data. The exercise was walking at 50% VO₂max, in four 15-min bouts starting 120 min after the meal.
+- Models three effects: higher liver glucose output, higher muscle uptake, and opening of extra capillaries in muscle. Some parts use partial differential equations; that's heavier than we need.
+- The meal enters as a measured appearance rate rather than a gut model.
+- Stated limits: moderate intensity only, and it underestimates how fast liver output recovers after exercise.
+- **Most useful to us as a validation target:** published post-meal glucose curves for healthy walkers versus resters.
+
+**Roy A, Parker RS. 2007.** Dynamic modeling of exercise effects on plasma glucose and insulin levels. *J Diabetes Sci Technol* 1(3):338-347 ([PMC2769581](https://pmc.ncbi.nlm.nih.gov/articles/PMC2769581)).
+- Extends the Bergman minimal model with exercise effects on glucose uptake, liver glucose output, glycogen depletion and insulin clearance.
+- Built from healthy-subject literature data; valid for 30–60% VO₂max and up to 210 min.
+- Its base model has no meal absorption and no pancreatic secretion, so it has the same gaps as Bergman.
+
+**Real-world check (not a model).** A systematic review and meta-analysis of 8 randomized trials with 116 participants ([PMC10036272](https://pmc.ncbi.nlm.nih.gov/articles/PMC10036272/)) found:
+- Exercise after a meal lowered the glucose rise compared with exercise before it (standardized mean difference 0.47).
+- The effect was greatest within 30 minutes of finishing the meal.
+
+Whatever engine we build should reproduce that direction and timing.
+
+**Options for "Walk it off"**
+1. **Dalla Man meal model, with exercise effects taken from Romeres 2021 (recommended).** Raise insulin-independent use immediately and insulin-dependent use with a delay, by the published healthy-subject amounts. Then check the result against Frank 2021's walking curves and the meta-analysis. The combination is ours, so the UI labels it "meal model + published exercise effect sizes."
+2. Implement Frank 2021 as a separate engine for this preset only. It's the closest published match (healthy subjects, mixed meal, walking), but it's heavy and needs the meal appearance rate supplied from outside.
+3. Defer "Walk it off" to a later version.
 
 ## Mixed meals: protein and fat
 
@@ -145,10 +183,23 @@ K is set by the initial energy balance.
 
 **What still needs reading:** the main paper's validation figures, to pick a reproduction target, and the validated input ranges, so controls can be clamped.
 
-## Decisions needed
+## Without the 2007 IEEE paper
 
-1. Approve Dalla Man 2007 (meal) and Hall 2011 (energy) as the v1 engines, and drop Bergman as an engine.
-2. Preset 1: switch to a carbohydrate-only comparison for v1?
-3. "Walk it off": search for a non-diabetic exercise model, adopt the type 1 diabetes extension labeled as extrapolated, or defer?
-4. Obtain the full text of the 2007 IEEE paper, which is paywalled, for the type 2 diabetes parameters and the reproduction figure.
-5. Who signs off citations (`verifiedBy`)? The loader rejects facts no named person has checked.
+Buying the paper wasn't possible. Fallbacks:
+- **Normal-subject parameters:** the curated BioModels SBML ([BIOMD0000000379](https://biomodels.org/BIOMD0000000379)). BioModels curators check that a model reproduces a result from its paper before marking it curated.
+- **Reproduction test:** use the curated model's simulated output as the regression target, and say so in the test. A figure from the paper itself can replace it later.
+- **Type 2 diabetes parameters:** MathWorks' SimBiology documentation of this model lists a type 2 variant (for example basal glucose 164.18 mg/dL and basal insulin 54.81 pmol/L). It's a secondary source and must be labeled as such.
+- **Other routes to the paper:** ask the corresponding author for a copy (authors usually share), or get it through a public or university library's interlibrary loan.
+
+## Decisions
+
+Made on Oct 1, 2026:
+1. **Engines:** Dalla Man 2007 for the meal scale and Hall 2011 for the energy scale. Bergman is dropped as an engine.
+2. **Citation checks:** Vaughan signs off citations (`verifiedBy`).
+3. **IEEE paper:** couldn't be purchased. Use the fallbacks above. The curated BioModels SBML is the primary source for the normal subject. The MathWorks type 2 variant is a labeled secondary source.
+4. **Preset 1, "Same calories, different fuel":**
+   - Two meals with the same calories and different macros.
+   - The glucose curve comes from the carbohydrate only.
+   - The diagram routes protein (portal vein) and fat (lymph) qualitatively.
+   - A label states that the model doesn't include how fat and protein slow digestion.
+5. **"Walk it off":** the meta-analysis ([PMC10036272](https://pmc.ncbi.nlm.nih.gov/articles/PMC10036272/)) is the acceptance check. The engine must show a smaller glucose rise with walking after a meal, strongest within 30 minutes. The exercise rates come from Romeres 2021, added to the meal model. This reading of Vaughan's "meta" answer was flagged to Vaughan for confirmation.

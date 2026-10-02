@@ -9,7 +9,8 @@ A learner sets up a body and a scenario, changes one thing, and watches how the 
 
 ## Status
 
-Milestone 1 (core domain types, a reference-model loader with a citation check, and unit tests) is in progress.
+- **Milestone 1, done.** Core domain types, a reference-model loader with a citation check, and unit tests.
+- **Milestone 2, engine done; citation sign-off pending.** The Dalla Man 2007 meal engine reproduces the curated BioModels SBML. Its parameters await human verification ([checklist](docs/citation-review-dalla-man-2007.md)). Until then the parameter loader refuses them.
 
 ## Develop
 
@@ -28,6 +29,9 @@ npm run dev
 | `src/core/` | Pure domain: the reference model types and loader, simulation types and ports. Imports nothing outside itself; `tests/boundaries.test.ts` enforces this |
 | `src/adapters/` | Implementations of the core's ports |
 | `data/reference-model/` | The five-layer reference model as data. The diagram is generated from this |
+| `data/parameters/` | Cited parameter sets for each engine |
+| `data/sources/` | Machine-readable source models, e.g. the curated BioModels SBML |
+| `scripts/` | Generate test fixtures from the source models using independent solvers |
 | `tests/` | Unit tests |
 
 ## Sourcing rule
