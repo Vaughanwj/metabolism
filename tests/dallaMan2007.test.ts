@@ -3,8 +3,6 @@ import { describe, expect, it } from 'vitest';
 import { dallaMan2007, loadParameterSet, type ParameterSet, type RunResult, type Scenario } from '../src/core';
 import normal from '../data/parameters/dalla-man-2007-normal.json';
 
-// The bundled parameters are not yet human-verified, so the engine tests use them directly.
-// loadParameterSet is tested separately to show the app would refuse them until verified.
 const params = normal as unknown as ParameterSet;
 
 function mealScenario(carbohydrateG: number, timeStep = 0.1, duration = 420): Scenario {
@@ -120,20 +118,19 @@ describe('Dalla Man 2007 engine: behaviour', () => {
 });
 
 describe('loadParameterSet', () => {
-  it('refuses the bundled set until every value is human-verified', () => {
+  it('accepts the bundled set, which has been human-verified', () => {
     const result = loadParameterSet(normal);
-    expect(result.ok).toBe(false);
-    if (result.ok) return;
-    expect(result.errors).toHaveLength(44);
-    expect(result.errors[0]).toBe('V_G: citation not verified by a named person');
+    expect(result.ok ? [] : result.errors).toEqual([]);
+    if (!result.ok) return;
+    expect(result.set.parameters).toHaveLength(44);
+    expect(result.set.parameters.every((p) => p.citation.verifiedBy === 'Vaughan Wynne-Jones')).toBe(true);
   });
 
-  it('accepts the set once verified', () => {
-    const verified = {
+  it('refuses the whole set if any value is unverified', () => {
+    const unverified = {
       ...normal,
-      parameters: normal.parameters.map((p) => ({ ...p, citation: { ...p.citation, verifiedBy: 'A Reviewer', verifiedOn: '2026-10-01' } })),
+      parameters: normal.parameters.map((p) => (p.id === 'k_abs' ? { ...p, citation: { ...p.citation, verifiedBy: '' } } : p)),
     };
-    const result = loadParameterSet(verified);
-    expect(result.ok).toBe(true);
+    expect(loadParameterSet(unverified)).toEqual({ ok: false, errors: ['k_abs: citation not verified by a named person'] });
   });
 });

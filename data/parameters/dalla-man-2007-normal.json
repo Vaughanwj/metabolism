@@ -2,7 +2,7 @@
   "id": "dalla-man-2007-normal",
   "engineId": "dalla-man-2007",
   "name": "Dalla Man 2007, average normal subject",
-  "note": "Units are as understood from the model structure and must be checked against the paper. verifiedBy is empty until Vaughan checks each value against BioModels.",
+  "note": "Values verified against the curated SBML by Vaughan Wynne-Jones on 2026-10-02. Units are as understood from the model structure and have not been checked against the paper.",
   "parameters": [
     {
       "id": "V_G",
@@ -13,8 +13,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter V_G",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -26,8 +26,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter k_1",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -39,8 +39,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter k_2",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -52,8 +52,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter G_b",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -65,8 +65,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter V_I",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -78,8 +78,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter m_1",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -91,8 +91,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter m_2",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -104,8 +104,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter m_4",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -117,8 +117,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter m_5",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -130,8 +130,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter m_6",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -143,8 +143,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter I_b",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -156,8 +156,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter S_b",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -169,8 +169,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter k_max",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -182,8 +182,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter k_min",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -195,8 +195,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter k_abs",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -208,8 +208,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter k_gri",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -221,8 +221,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter f",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -234,8 +234,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter b",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -247,8 +247,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter d",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -260,8 +260,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter BW",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -273,8 +273,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter k_p1",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -286,8 +286,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter k_p2",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -299,8 +299,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter k_p3",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -312,8 +312,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter k_p4",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -325,8 +325,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter k_i",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -338,8 +338,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter U_ii",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -351,8 +351,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter V_m0",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -364,8 +364,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter V_mX",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -377,8 +377,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter K_m0",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -390,8 +390,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter p_2U",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -403,8 +403,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter part",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -416,8 +416,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter K",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -429,8 +429,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter alpha",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -442,8 +442,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter beta",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -455,8 +455,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML parameter gamma",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -468,8 +468,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML species G_p initial amount",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -481,8 +481,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML species G_t initial amount",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -494,8 +494,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML species I_l initial amount",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -507,8 +507,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML species I_p initial amount",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -520,8 +520,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML species I_1 initial amount",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -533,8 +533,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML species I_d initial amount",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -546,8 +546,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML species X initial amount",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -559,8 +559,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML species I_po initial amount",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     },
     {
@@ -572,8 +572,8 @@
         "source": "Dalla Man C, Rizza RA, Cobelli C. Meal simulation model of the glucose-insulin system. IEEE Trans Biomed Eng. 2007;54(10):1740-9. Values from the curated SBML, BioModels BIOMD0000000379",
         "locator": "SBML species Y initial amount",
         "url": "https://biomodels.org/BIOMD0000000379",
-        "verifiedBy": "",
-        "verifiedOn": ""
+        "verifiedBy": "Vaughan Wynne-Jones",
+        "verifiedOn": "2026-10-02"
       }
     }
   ]
