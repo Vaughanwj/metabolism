@@ -8,9 +8,17 @@ export interface PresetMeal extends MealPayload {
   description: string;
 }
 
+export interface PresetActivity {
+  /** Minutes after the meal. */
+  startAfterMeal: number;
+  durationMin: number;
+  intensity: string;
+}
+
 export type PresetChange =
   | { variable: 'meal'; meal: PresetMeal }
-  | { variable: 'insulinSensitivity'; value: number };
+  | { variable: 'insulinSensitivity'; value: number }
+  | { variable: 'activity'; activity: PresetActivity };
 
 export interface Preset {
   id: string;
@@ -32,12 +40,16 @@ export interface PresetRuns {
   intervention: Intervention;
 }
 
-function scenario(id: string, p: Preset, profile: BodyProfile, meal: PresetMeal): Scenario {
+function scenario(id: string, p: Preset, profile: BodyProfile, meal: PresetMeal, activity?: PresetActivity): Scenario {
   const { time, description: _, ...payload } = meal;
+  const events: Scenario['events'] = [{ time, kind: 'meal', payload }];
+  if (activity) {
+    events.push({ time: time + activity.startAfterMeal, kind: 'activity', payload: { intensity: activity.intensity, durationMin: activity.durationMin } });
+  }
   return {
     id,
     profile,
-    events: [{ time, kind: 'meal', payload }],
+    events,
     duration: p.duration,
     timeStep: p.timeStep,
     engineId: p.engineId,
@@ -60,6 +72,18 @@ export function presetRuns(p: Preset): PresetRuns {
         baseline,
         variant: scenario(`${p.id}:variant`, p, { ...p.profile, insulinSensitivity: p.change.value }, p.meal),
         intervention: { variable: 'Insulin sensitivity', before: pct(p.profile.insulinSensitivity), after: pct(p.change.value) },
+      };
+    }
+    case 'activity': {
+      const a = p.change.activity;
+      return {
+        baseline,
+        variant: scenario(`${p.id}:variant`, p, p.profile, p.meal, a),
+        intervention: {
+          variable: 'Activity after the meal',
+          before: 'rest',
+          after: `${a.durationMin} min of ${a.intensity} activity, starting ${a.startAfterMeal} min after the meal`,
+        },
       };
     }
   }
@@ -100,7 +124,12 @@ export function loadPreset(raw: unknown): { ok: true; preset: Preset } | { ok: f
   else if (change['variable'] === 'meal') checkMeal(change['meal'], 'change.meal', errors);
   else if (change['variable'] === 'insulinSensitivity') {
     if (typeof change['value'] !== 'number') errors.push('change.value must be a number');
-  } else errors.push('change.variable must be "meal" or "insulinSensitivity"');
+  } else if (change['variable'] === 'activity') {
+    const a = change['activity'];
+    if (!isRecord(a) || typeof a['startAfterMeal'] !== 'number' || typeof a['durationMin'] !== 'number' || typeof a['intensity'] !== 'string') {
+      errors.push('change.activity needs startAfterMeal, durationMin and intensity');
+    }
+  } else errors.push('change.variable must be "meal", "insulinSensitivity" or "activity"');
 
   if (errors.length > 0) return { ok: false, errors };
   return { ok: true, preset: raw as unknown as Preset };

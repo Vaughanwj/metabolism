@@ -102,8 +102,14 @@ describe('Dalla Man 2007 engine: behaviour', () => {
 
   it('refuses events it does not model', () => {
     const scenario = mealScenario(45);
-    scenario.events.push({ time: 30, kind: 'activity', payload: { intensity: 'walk', durationMin: 15 } });
-    expect(() => dallaMan2007.run(scenario, params)).toThrow(/does not model "activity"/);
+    scenario.events.push({ time: 30, kind: 'fast', payload: { durationMin: 60 } });
+    expect(() => dallaMan2007.run(scenario, params)).toThrow(/does not model "fast"/);
+  });
+
+  it('refuses activity when the parameter set has no exercise parameters', () => {
+    const scenario = mealScenario(45);
+    scenario.events.push({ time: 30, kind: 'activity', payload: { intensity: 'moderate', durationMin: 15 } });
+    expect(() => dallaMan2007.run(scenario, params)).toThrow(/has no exercise parameters \(ex_iid_increase, ex_id_increase, ex_tau\)/);
   });
 
   it('refuses a parameter set with a missing parameter', () => {
@@ -113,7 +119,7 @@ describe('Dalla Man 2007 engine: behaviour', () => {
 
   it('records the model, version and parameter set used', () => {
     const result = dallaMan2007.run(mealScenario(45), params);
-    expect([result.engineId, result.engineVersion, result.parameterSetId]).toEqual(['dalla-man-2007', '0.3.0', 'dalla-man-2007-normal']);
+    expect([result.engineId, result.engineVersion, result.parameterSetId]).toEqual(['dalla-man-2007', '0.4.0', 'dalla-man-2007-normal']);
   });
 });
 

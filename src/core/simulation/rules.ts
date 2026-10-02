@@ -5,7 +5,7 @@ import type { BodyProfile, ParameterSet, Scenario } from './types';
 // What an engine may be asked to do. Each input has a range taken from its source, with a
 // checked citation; scenarios outside a range are refused, never extrapolated.
 
-export type InputId = 'carbohydrateG' | 'insulinSensitivity';
+export type InputId = 'carbohydrateG' | 'insulinSensitivity' | 'activityStartMin' | 'activityDurationMin';
 
 export interface InputRule {
   id: InputId;
@@ -25,7 +25,7 @@ export interface ScenarioRules {
 
 export type RulesResult = { ok: true; rules: ScenarioRules } | { ok: false; errors: string[] };
 
-const INPUT_IDS: readonly InputId[] = ['carbohydrateG', 'insulinSensitivity'];
+const INPUT_IDS: readonly InputId[] = ['carbohydrateG', 'insulinSensitivity', 'activityStartMin', 'activityDurationMin'];
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
@@ -84,6 +84,20 @@ export function checkScenario(scenario: Scenario, rules: ScenarioRules): string[
       if (r) reasons.push(r);
     }
   }
+  const firstMeal = Math.min(...scenario.events.filter((e) => e.kind === 'meal').map((e) => e.time));
+  const start = rule(rules, 'activityStartMin');
+  const length = rule(rules, 'activityDurationMin');
+  for (const e of scenario.events) {
+    if (e.kind !== 'activity') continue;
+    if (!start || !length || !Number.isFinite(firstMeal)) {
+      reasons.push('This engine has no sourced range for activity in this scenario.');
+      continue;
+    }
+    const r1 = outside(start, e.time - firstMeal, 'Activity starting after the meal');
+    const r2 = outside(length, e.payload.durationMin, 'Activity duration');
+    for (const r of [r1, r2]) if (r) reasons.push(r);
+  }
+
   const sensitivity = rule(rules, 'insulinSensitivity');
   if (sensitivity) {
     const r = outside(sensitivity, scenario.profile.insulinSensitivity, 'Insulin sensitivity');

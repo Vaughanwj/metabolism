@@ -15,14 +15,11 @@ A learner sets up a body and a scenario, changes one thing, and watches how the 
   - The machine view is generated from the reference model, with flows animated by an engine run and playback controls.
   - Clicking a component shows its five-layer bill of materials.
   - `data/bindings/` says which engine output drives which flow, and where the model lumps flows together.
-- **Milestone 4, in progress.** Built so far:
-  - the comparison page: baseline and variant diagrams on a shared scale, charts, glucose metrics and a generated "what changed and why" note
-  - scenario controls that allow only one changed variable
-  - the "Same calories, different fuel" and "The resistant machine" presets
-
-  Still waiting on:
-  - citation sign-off ([checklist](docs/citation-review-milestone-4.md)); until then the simulator refuses to run
-  - "Walk it off", which needs an exercise model decision (see the engine assessment)
+- **Milestone 4, built; citation sign-off pending.**
+  - The comparison page shows baseline and variant diagrams on a shared scale, with charts, glucose metrics and a generated "what changed and why" note.
+  - Scenario controls allow only one changed variable.
+  - Three presets: "Same calories, different fuel", "The resistant machine" and "Walk it off" (exercise effects from Romeres 2021, checked against a meta-analysis).
+  - The simulator refuses to run until the facts in the [checklist](docs/citation-review-milestone-4.md) are signed off.
 
   In development, `?preview-unverified` shows the page before sign-off, with a warning banner.
 

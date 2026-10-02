@@ -1,0 +1,47 @@
+{
+  "id": "romeres-2021-exercise",
+  "engineId": "dalla-man-2007",
+  "name": "Exercise effect sizes, healthy adults (Romeres et al. 2021)",
+  "note": "Added to the Dalla Man 2007 parameter set only when a scenario includes activity. Mapping onto the meal model (this project's own choice, option 2 approved by Vaughan Wynne-Jones on 2026-10-02): the insulin-independent effect raises all insulin-independent disposal (U_ii plus the V_m0 uptake term, with the extra taken up by muscle); the insulin-dependent effect raises the V_mX term; both apply immediately.",
+  "parameters": [
+    {
+      "id": "ex_iid_increase",
+      "value": 0.79,
+      "unit": "fraction",
+      "description": "Rise in insulin-independent glucose disposal during exercise, applied to U_ii plus the V_m0 uptake term, with the extra taken up by muscle. Mean of the three visit means in non-diabetic subjects: 67%, 97% and 74%.",
+      "citation": {
+        "source": "Romeres D, Schiavon M, Basu A, Cobelli C, Basu R, Dalla Man C. Exercise effect on insulin-dependent and insulin-independent glucose utilization in healthy individuals and individuals with type 1 diabetes: a modeling study. Am J Physiol Endocrinol Metab. 2021;321(1):E122-E129",
+        "locator": "Results, non-diabetic subjects: insulin-independent effect 67 ± 31% (visit 1, euglycemia-low insulin), 97 ± 28% (visit 2, euglycemia-high insulin), 74 ± 16% (visit 3, hyperglycemia-low insulin). Exercise at 65% VO2max for 60 min.",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8321821/",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "ex_id_increase",
+      "value": 0.24,
+      "unit": "fraction",
+      "description": "Rise in insulin-dependent glucose disposal during exercise, applied to V_mX. Mean of the three visit means in non-diabetic subjects: 40%, 10% and 22%.",
+      "citation": {
+        "source": "Romeres D, Schiavon M, Basu A, Cobelli C, Basu R, Dalla Man C. Exercise effect on insulin-dependent and insulin-independent glucose utilization in healthy individuals and individuals with type 1 diabetes: a modeling study. Am J Physiol Endocrinol Metab. 2021;321(1):E122-E129",
+        "locator": "Results, non-diabetic subjects: insulin-dependent effect 40 ± 33% (visit 1), 10 ± 17% (visit 2), 22 ± 32% (visit 3).",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8321821/",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "ex_tau",
+      "value": 1,
+      "unit": "min",
+      "description": "Time constant of the filter that smooths the on/off activity signal.",
+      "citation": {
+        "source": "Romeres D, Schiavon M, Basu A, Cobelli C, Basu R, Dalla Man C. Exercise effect on insulin-dependent and insulin-independent glucose utilization in healthy individuals and individuals with type 1 diabetes: a modeling study. Am J Physiol Endocrinol Metab. 2021;321(1):E122-E129",
+        "locator": "Methods: E(t) \"modeled ... with a square-wave signal (equal to 1 during exercise and 0 otherwise) smoothed with a first-order low-pass filter, with time constant of 1 min\".",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8321821/",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    }
+  ]
+}

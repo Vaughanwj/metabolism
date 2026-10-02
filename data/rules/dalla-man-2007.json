@@ -21,11 +21,43 @@
       "unit": "× normal",
       "min": 0.3,
       "max": 1,
-      "scales": ["V_m0", "V_mX", "k_p3"],
+      "scales": [
+        "V_m0",
+        "V_mX",
+        "k_p3"
+      ],
       "citation": {
         "source": "Dalla Man C, Raimondo DM, Rizza RA, Cobelli C. GIM, simulation software of meal glucose-insulin model. J Diabetes Sci Technol. 2007",
         "locator": "\"peripheral and hepatic insulin sensitivity (V_max and k_p3 in model, respectively)\"; \"peripheral and hepatic insulin sensitivity, which are set to 30% of the normal\". V_max read as the whole maximum uptake rate, V_m0 + V_mX (named V_mmax in the curated SBML).",
         "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2769591",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "activityStartMin",
+      "label": "Activity start, after the meal",
+      "unit": "min",
+      "min": 0,
+      "max": 120,
+      "citation": {
+        "source": "Engeroff T, Groneberg DA, Wilke J. After dinner rest a while, after supper walk a mile? A systematic review with meta-analysis on the acute postprandial glycemic response to exercise before and after meal ingestion in healthy subjects and patients with impaired glucose tolerance. Sports Med. 2023;53(4):849-869",
+        "locator": "Post-meal exercise started 0–29 min or 30–120 min after the meal; the effect was greatest within 30 min of finishing the meal.",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10036272/",
+        "verifiedBy": "",
+        "verifiedOn": ""
+      }
+    },
+    {
+      "id": "activityDurationMin",
+      "label": "Activity duration",
+      "unit": "min",
+      "min": 1,
+      "max": 60,
+      "citation": {
+        "source": "Romeres D, Schiavon M, Basu A, Cobelli C, Basu R, Dalla Man C. Am J Physiol Endocrinol Metab. 2021;321(1):E122-E129",
+        "locator": "Exercise lasted 1 hour at 65% VO2max; the effect sizes used come from that protocol, so longer activity is outside what was measured.",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8321821/",
         "verifiedBy": "",
         "verifiedOn": ""
       }

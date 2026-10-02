@@ -14,6 +14,7 @@ import {
   type MealMetrics,
   type ParameterSet,
   type Preset,
+  type PresetChange,
   type PresetMeal,
   type ReferenceModel,
   type RunResult,
@@ -164,20 +165,34 @@ export function mountApp(root: HTMLElement, data: AppData): void {
     const variant = h('div', { className: 'settings-col' }, h('h3', { textContent: 'Variant: change one thing' }));
     const which = h('select', { ariaLabel: 'Variable to change' },
       h('option', { value: 'meal', textContent: 'Meal composition' }),
-      h('option', { value: 'insulinSensitivity', textContent: 'Insulin sensitivity' }));
+      h('option', { value: 'insulinSensitivity', textContent: 'Insulin sensitivity' }),
+      h('option', { value: 'activity', textContent: 'Activity after the meal' }));
     which.value = preset.change.variable;
     which.addEventListener('change', () => {
-      preset = {
-        ...preset,
-        id: 'custom',
-        change: which.value === 'meal' ? { variable: 'meal', meal: { ...preset.meal } } : { variable: 'insulinSensitivity', value: preset.profile.insulinSensitivity },
-      };
+      const change: PresetChange =
+        which.value === 'meal' ? { variable: 'meal', meal: { ...preset.meal } }
+        : which.value === 'activity' ? { variable: 'activity', activity: { startAfterMeal: 15, durationMin: 30, intensity: 'moderate' } }
+        : { variable: 'insulinSensitivity', value: preset.profile.insulinSensitivity };
+      preset = { ...preset, id: 'custom', change };
       renderSettings();
       runComparison();
     });
     variant.append(h('label', { className: 'field' }, h('span', { textContent: 'What changes' }), which));
     if (preset.change.variable === 'meal') {
       variant.append(mealFields(preset.change.meal, 'Meal', (m) => (preset = { ...preset, id: 'custom', change: { variable: 'meal', meal: m } })));
+    } else if (preset.change.variable === 'activity') {
+      const a = preset.change.activity;
+      const startRule = rules.inputs.find((r) => r.id === 'activityStartMin');
+      const lengthRule = rules.inputs.find((r) => r.id === 'activityDurationMin');
+      const start = numberField('Starts after meal (min)', a.startAfterMeal, startRule?.min ?? 0, startRule?.max ?? 0, 5, startRule ? `${startRule.min}–${startRule.max} min` : 'no sourced range');
+      const length = numberField('Lasts (min)', a.durationMin, lengthRule?.min ?? 0, lengthRule?.max ?? 0, 5, lengthRule ? `up to ${lengthRule.max} min` : 'no sourced range');
+      const update = () => {
+        preset = { ...preset, id: 'custom', change: { variable: 'activity', activity: { ...a, startAfterMeal: Number(start.input.value), durationMin: Number(length.input.value) } } };
+        runComparison();
+      };
+      for (const f of [start, length]) f.input.addEventListener('change', update);
+      variant.append(h('fieldset', {}, h('legend', { textContent: 'Moderate activity' }), start.wrap, length.wrap,
+        h('p', { className: 'fieldset-note', textContent: "Effect sizes come from exercise at 65% of VO₂max in healthy adults (Romeres et al. 2021). The liver's extra glucose release during exercise is not modeled." })));
     } else {
       const v = sensitivityField('Insulin sensitivity', preset.change.value, sensRule.min, sensRule.max);
       v.input.addEventListener('change', () => {
@@ -193,18 +208,19 @@ export function mountApp(root: HTMLElement, data: AppData): void {
   function runComparison() {
     const runs = presetRuns(preset);
     const reasons = [...checkScenario(runs.baseline, rules), ...checkScenario(runs.variant, rules)];
-    refusal.hidden = reasons.length === 0;
+    refusal.hidden = true;
     if (reasons.length > 0) {
-      setPlaying(false);
-      refusal.replaceChildren(h('strong', { textContent: 'This comparison was not run. ' }), ...reasons.map((r) => h('p', { textContent: r })));
-      machines.replaceChildren();
-      charts.replaceChildren();
-      results.replaceChildren();
-      current = null;
+      showRefusal(reasons);
       return;
     }
     const exec = (s: Scenario) => dallaMan2007.run(s, applyProfile(data.params, s.profile, rules));
-    const out: Record<'baseline' | 'variant', RunResult> = { baseline: exec(runs.baseline), variant: exec(runs.variant) };
+    let out: Record<'baseline' | 'variant', RunResult>;
+    try {
+      out = { baseline: exec(runs.baseline), variant: exec(runs.variant) };
+    } catch (e) {
+      showRefusal([e instanceof Error ? e.message : String(e)]);
+      return;
+    }
     const scenarios = { baseline: runs.baseline, variant: runs.variant };
 
     changed.replaceChildren(
@@ -237,9 +253,11 @@ export function mountApp(root: HTMLElement, data: AppData): void {
         const s = out[key].series.find((x) => x.variable === variable)!;
         return { label, className, times: s.times, values: s.values };
       });
+    const bands = runs.variant.events.flatMap((e) =>
+      e.kind === 'activity' ? [{ start: e.time, end: e.time + e.payload.durationMin, label: 'Variant activity' }] : []);
     const chartList = [
-      createChart({ title: 'Blood glucose', unit: 'mg/dL', series: seriesOf('G'), duration }),
-      createChart({ title: 'Plasma insulin', unit: 'pmol/L', series: seriesOf('I'), duration }),
+      createChart({ title: 'Blood glucose', unit: 'mg/dL', series: seriesOf('G'), duration, bands }),
+      createChart({ title: 'Plasma insulin', unit: 'pmol/L', series: seriesOf('I'), duration, bands }),
     ];
     charts.replaceChildren(...chartList.map((c) => c.element));
 
@@ -249,13 +267,23 @@ export function mountApp(root: HTMLElement, data: AppData): void {
       variant: mealMetrics(out.variant.series.find((s) => s.variable === 'G')!, 0, carbsOf(runs.variant)),
     };
     renderResults(metrics, explainComparison(compareRuns(out.baseline, out.variant, runs.intervention), binding.totals, metrics), scenarios);
-    renderCaption(out.baseline);
+    renderCaption(out.baseline, [...new Set([...out.baseline.limitations, ...out.variant.limitations])]);
 
     slider.max = String(duration);
     time = Math.min(time, duration);
     current = { duration, views, frames, charts: chartList };
     for (const v of views) v.select(selected);
     draw(0);
+  }
+
+  function showRefusal(reasons: string[]) {
+    setPlaying(false);
+    refusal.hidden = false;
+    refusal.replaceChildren(h('strong', { textContent: 'This comparison was not run. ' }), ...reasons.map((r) => h('p', { textContent: r })));
+    machines.replaceChildren();
+    charts.replaceChildren();
+    results.replaceChildren();
+    current = null;
   }
 
   function renderResults(metrics: { baseline: MealMetrics; variant: MealMetrics }, note: string[], scenarios: Record<'baseline' | 'variant', Scenario>) {
@@ -287,10 +315,10 @@ export function mountApp(root: HTMLElement, data: AppData): void {
     results.replaceChildren(h('div', { className: 'table-wrap' }, table), explanation);
   }
 
-  function renderCaption(run: RunResult) {
-    const limits = h('details', {}, h('summary', { textContent: 'What this model leaves out' }), h('ul', {}, ...run.limitations.map((l) => h('li', { textContent: l }))));
+  function renderCaption(run: RunResult, limitations: string[]) {
+    const limits = h('details', {}, h('summary', { textContent: 'What this model leaves out' }), h('ul', {}, ...limitations.map((l) => h('li', { textContent: l }))));
     caption.replaceChildren(
-      h('p', {}, h('strong', { textContent: 'Model output. ' }), `${data.modelLabel}. Engine ${run.engineId} ${run.engineVersion}, parameter set ${data.params.id}. Each run starts from the model's steady state for its settings.`),
+      h('p', {}, h('strong', { textContent: 'Model output. ' }), `${data.modelLabel}. Engine ${run.engineId} ${run.engineVersion}, parameter set ${run.parameterSetId}. Each run starts from the model's steady state for its settings.`),
       h('p', {
         className: 'legend',
         innerHTML:

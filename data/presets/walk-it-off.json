@@ -1,0 +1,13 @@
+{
+  "id": "walk-it-off",
+  "title": "Walk it off",
+  "question": "Where does the glucose go when muscle is working?",
+  "expectedObservation": "Activity soon after the meal makes working muscle take up more glucose, so the rise is smaller and shorter. In real trials, activity within about 30 minutes of finishing a meal lowered the glucose rise more than activity started later. This model shows the muscle side; it does not include the liver releasing extra glucose during exercise.",
+  "engineId": "dalla-man-2007",
+  "profile": { "age": 40, "sex": "female", "heightCm": 170, "weightKg": 78, "insulinSensitivity": 1, "activityLevel": 1.5 },
+  "meal": { "time": 0, "carbohydrateG": 78, "proteinG": 0, "fatG": 0, "fiberG": 0, "description": "78 g carbohydrate" },
+  "duration": 420,
+  "timeStep": 0.1,
+  "warmUpMinutes": 2880,
+  "change": { "variable": "activity", "activity": { "startAfterMeal": 15, "durationMin": 30, "intensity": "moderate" } }
+}

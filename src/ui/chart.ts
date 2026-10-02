@@ -16,6 +16,8 @@ export interface ChartOptions {
   unit: string;
   series: ChartSeries[];
   duration: number;
+  /** Shaded time windows, e.g. when the variant is active. */
+  bands?: { start: number; end: number; label: string }[];
 }
 
 export interface Chart {
@@ -65,6 +67,11 @@ export function createChart(opts: ChartOptions): Chart {
   const y = (v: number) => H - M.bottom - ((v - yMin) / (yMax - yMin || 1)) * (H - M.top - M.bottom);
 
   const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': `${opts.title} over time, ${opts.series.map((s) => s.label).join(' and ')}` });
+  for (const b of opts.bands ?? []) {
+    const band = el('rect', { x: x(b.start), y: M.top, width: x(b.end) - x(b.start), height: H - M.top - M.bottom, class: 'band' }, svg);
+    el('title', {}, band).textContent = `${b.label}: ${b.start}–${b.end} min`;
+    el('text', { x: x(b.start) + 4, y: H - M.bottom - 4, class: 'band-label' }, svg).textContent = b.label;
+  }
   const grid = el('g', { class: 'grid' }, svg);
   for (const v of ticksY) {
     el('line', { x1: M.left, x2: W - M.right, y1: y(v), y2: y(v) }, grid);
@@ -81,15 +88,15 @@ export function createChart(opts: ChartOptions): Chart {
   // Direct labels at each series' peak, where the lines are furthest apart, nudged if they collide.
   const peaks = opts.series.map((s) => {
     const i = s.values.indexOf(Math.max(...s.values));
-    return { s, x: x(s.times[i]!), y: y(s.values[i]!) - 8 };
+    return { s, x: x(s.times[i]!), y: Math.max(M.top + 10, y(s.values[i]!) - 8) };
   }).sort((a, b) => a.y - b.y);
   for (let i = 1; i < peaks.length; i++) {
     const a = peaks[i - 1]!;
     const b = peaks[i]!;
-    if (Math.abs(b.y - a.y) < 13 && Math.abs(b.x - a.x) < 60) b.y = a.y + 13;
+    if (b.y - a.y < 13 && Math.abs(b.x - a.x) < 70) b.y = a.y + 13;
   }
   for (const { s, x: lx, y: ly } of peaks) {
-    el('text', { x: lx + 6, y: Math.max(M.top + 10, ly), class: 'direct-label' }, svg).textContent = s.label;
+    el('text', { x: lx + 6, y: ly, class: 'direct-label' }, svg).textContent = s.label;
   }
 
   const cursor = el('line', { y1: M.top, y2: H - M.bottom, class: 'cursor' }, svg);

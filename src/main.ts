@@ -6,6 +6,7 @@ import {
   loadPreset,
   loadReferenceModel,
   loadScenarioRules,
+  type ParameterSet,
   type Preset,
   type ScenarioRules,
 } from './core';
@@ -13,13 +14,14 @@ import { bundledReferenceModel } from './adapters/bundled-reference-model';
 import { mountApp } from './ui/app';
 import binding from '../data/bindings/dalla-man-2007.json';
 import normalSubject from '../data/parameters/dalla-man-2007-normal.json';
+import exerciseData from '../data/parameters/romeres-2021-exercise.json';
 import rulesData from '../data/rules/dalla-man-2007.json';
 import energyData from '../data/reference/energy-factors.json';
 
 // Composition root: load and check the data, then mount the comparison page.
 
 const presetFiles = import.meta.glob<{ default: unknown }>('../data/presets/*.json', { eager: true });
-const PRESET_ORDER = ['same-calories-different-fuel', 'the-resistant-machine'];
+const PRESET_ORDER = ['same-calories-different-fuel', 'the-resistant-machine', 'walk-it-off'];
 
 const root = document.querySelector<HTMLElement>('#app')!;
 
@@ -42,6 +44,21 @@ if (!bindingResult.ok) fail('The engine binding failed to load.', bindingResult.
 
 const params = loadParameterSet(normalSubject);
 if (!params.ok) fail('The parameter set was refused.', params.errors);
+
+// Exercise parameters join the meal parameters only once verified. Without them the engine
+// refuses scenarios with activity, and the page says why.
+let engineParams: ParameterSet = params.set;
+const exercise = loadParameterSet(exerciseData);
+const exerciseSet = exercise.ok ? exercise.set : previewUnverified ? (exerciseData as unknown as ParameterSet) : null;
+if (!exercise.ok) unverified.push(...exercise.errors.map((e) => `Exercise effects: ${e}`));
+if (exerciseSet) {
+  engineParams = {
+    ...params.set,
+    id: `${params.set.id}+${exerciseSet.id}`,
+    name: `${params.set.name}, with ${exerciseSet.name}`,
+    parameters: [...params.set.parameters, ...exerciseSet.parameters],
+  };
+}
 
 let rules: ScenarioRules;
 const rulesResult = loadScenarioRules(rulesData);
@@ -71,7 +88,7 @@ if (previewUnverified && unverified.length > 0) {
 mountApp(root, {
   model,
   binding: bindingResult.binding,
-  params: params.set,
+  params: engineParams,
   rules,
   presets,
   energy: energyResult.ok ? energyResult.factors : null,

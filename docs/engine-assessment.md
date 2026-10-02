@@ -122,7 +122,7 @@ Found after the search requested on Oct 1, 2026.
 - Built from healthy-subject literature data; valid for 30–60% VO₂max and up to 210 min.
 - Its base model has no meal absorption and no pancreatic secretion, so it has the same gaps as Bergman.
 
-**Real-world check (not a model).** A systematic review and meta-analysis of 8 randomized trials with 116 participants ([PMC10036272](https://pmc.ncbi.nlm.nih.gov/articles/PMC10036272/)) found:
+**Real-world check (not a model).** Engeroff T, Groneberg DA, Wilke J. *Sports Med* 2023;53(4):849-869, a systematic review and meta-analysis of 8 randomized trials with 116 participants (healthy adults and people with impaired glucose tolerance) ([PMC10036272](https://pmc.ncbi.nlm.nih.gov/articles/PMC10036272/)) found:
 - Exercise after a meal lowered the glucose rise compared with exercise before it (standardized mean difference 0.47).
 - The effect was greatest within 30 minutes of finishing the meal.
 
@@ -202,7 +202,7 @@ Made on Oct 1, 2026:
    - The glucose curve comes from the carbohydrate only.
    - The diagram routes protein (portal vein) and fat (lymph) qualitatively.
    - A label states that the model doesn't include how fat and protein slow digestion.
-5. **"Walk it off":** the meta-analysis ([PMC10036272](https://pmc.ncbi.nlm.nih.gov/articles/PMC10036272/)) is the acceptance check. The engine must show a smaller glucose rise with walking after a meal, strongest within 30 minutes. The exercise rates come from Romeres 2021, added to the meal model. This reading of Vaughan's "meta" answer was flagged to Vaughan for confirmation.
+5. **"Walk it off":** the meta-analysis ([PMC10036272](https://pmc.ncbi.nlm.nih.gov/articles/PMC10036272/)) is the acceptance check. The engine must show a smaller glucose rise with walking after a meal, strongest within 30 minutes. The exercise rates come from Romeres 2021, added to the meal model. Vaughan confirmed this reading on 2026-10-02.
 
 ## Milestone 4 findings (Oct 2, 2026)
 
@@ -231,3 +231,25 @@ Made on Oct 1, 2026:
 
      The fit is closer, but it means adapting terms from a different model structure.
 - The meta-analysis stays the acceptance check whichever option is chosen.
+
+**"Walk it off": option 2 implemented (Oct 2, 2026).**
+- Engine 0.4 adds an activity signal (a square wave smoothed over 1 min).
+- During activity, all insulin-independent disposal (U_ii plus the V_m0 term) rises by 79%, with the extra going to muscle, and the V_mX term rises by 24%. Both apply immediately.
+- A first mapping that raised only the V_m0 term understated Romeres's definition of insulin-independent disposal by about 2.7 times, so it was replaced.
+
+**Acceptance check against the meta-analysis** (`tests/walkItOff.test.ts`). The model passes the peak checks:
+
+| Activity start | Peak rise (rest: 68.3 mg/dL) |
+| --- | --- |
+| 0 min after the meal | 63.7 mg/dL |
+| 15 min after the meal | 61.0 mg/dL |
+| 30 min after the meal | 58.4 mg/dL |
+| 60–120 min after the meal | 67.7–68.3 mg/dL, about no change |
+
+So activity soon after the meal lowers the peak, and lowers it more than activity started later.
+
+**Known gaps:**
+- **The effect is modest:** about 11% off the peak and 2–3% off the area above the start. The effect sizes were measured with insulin held fixed by a clamp. In this model, lower glucose also lowers insulin, which cancels part of the effect.
+- **The area measure doesn't follow the timing pattern.** Later activity reduces it slightly more (−5% at 90 min against −2.5% at 15 min).
+- **Pre-meal activity is outside the rules.** In the model it lowers the starting glucose, which makes the area measure misleading.
+- **Possible improvement:** option 3, Frank 2021's walking terms, may give larger and better-timed effects.

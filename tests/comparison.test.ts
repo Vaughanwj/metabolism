@@ -47,6 +47,8 @@ describe('scenario rules', () => {
     expect(result.errors).toEqual([
       'carbohydrateG: citation not verified by a named person',
       'insulinSensitivity: citation not verified by a named person',
+      'activityStartMin: citation not verified by a named person',
+      'activityDurationMin: citation not verified by a named person',
     ]);
   });
 
