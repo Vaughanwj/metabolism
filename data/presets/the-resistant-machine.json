@@ -1,0 +1,13 @@
+{
+  "id": "the-resistant-machine",
+  "title": "The resistant machine",
+  "question": "What does insulin resistance look like on a glucose curve?",
+  "expectedObservation": "With muscle and liver responding less to insulin, the machine settles at a higher fasting glucose and much higher fasting insulin before the meal. After the same meal, glucose rises further and takes longer to come back, and the pancreas releases more insulin to compensate.",
+  "engineId": "dalla-man-2007",
+  "profile": { "age": 40, "sex": "female", "heightCm": 170, "weightKg": 78, "insulinSensitivity": 1, "activityLevel": 1.5 },
+  "meal": { "time": 0, "carbohydrateG": 78, "proteinG": 0, "fatG": 0, "fiberG": 0, "description": "78 g carbohydrate" },
+  "duration": 420,
+  "timeStep": 0.1,
+  "warmUpMinutes": 2880,
+  "change": { "variable": "insulinSensitivity", "value": 0.3 }
+}

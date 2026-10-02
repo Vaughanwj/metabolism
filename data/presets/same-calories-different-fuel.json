@@ -1,0 +1,16 @@
+{
+  "id": "same-calories-different-fuel",
+  "title": "Same calories, different fuel",
+  "question": "Why do two meals of equal size move glucose so differently?",
+  "expectedObservation": "The carbohydrate-heavy meal sends glucose higher and keeps it up longer. In this model only the carbohydrate drives the glucose curve: the protein and fat take other routes (portal vein and lymph), and the model does not include how they slow digestion, so the real difference is likely larger.",
+  "engineId": "dalla-man-2007",
+  "profile": { "age": 40, "sex": "female", "heightCm": 170, "weightKg": 78, "insulinSensitivity": 1, "activityLevel": 1.5 },
+  "meal": { "time": 0, "carbohydrateG": 78, "proteinG": 9, "fatG": 5, "fiberG": 0, "description": "Carbohydrate-heavy breakfast: 78 g carbohydrate, 9 g protein, 5 g fat" },
+  "duration": 420,
+  "timeStep": 0.1,
+  "warmUpMinutes": 2880,
+  "change": {
+    "variable": "meal",
+    "meal": { "time": 0, "carbohydrateG": 45, "proteinG": 25, "fatG": 12.5, "fiberG": 0, "description": "Protein-and-fat breakfast: 45 g carbohydrate, 25 g protein, 12.5 g fat" }
+  }
+}

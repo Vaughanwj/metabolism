@@ -57,6 +57,8 @@ export function createMachineView(
   boundControls: Set<string>,
   readouts: Readout[],
   onSelect: (componentId: string) => void,
+  /** Keeps marker ids unique when several diagrams share a page. */
+  idPrefix = 'machine',
 ): MachineView {
   const readoutCount = new Map<string, number>();
   for (const r of readouts) readoutCount.set(r.componentId, (readoutCount.get(r.componentId) ?? 0) + 1);
@@ -73,7 +75,7 @@ export function createMachineView(
   for (const kind of ['glucose', 'protein', 'fat', 'food', 'exhaust', 'other', 'idle']) {
     // Fixed size in user space, so arrowheads do not balloon on thick flows.
     const marker = el('marker', {
-      id: `arrow-${kind}`, viewBox: '0 0 10 10', refX: 9, refY: 5,
+      id: `${idPrefix}-arrow-${kind}`, viewBox: '0 0 10 10', refX: 9, refY: 5,
       markerWidth: 9, markerHeight: 9, markerUnits: 'userSpaceOnUse', orient: 'auto-start-reverse',
     }, defs);
     el('path', { d: 'M0,0 L10,5 L0,10 z', class: `arrowhead ${kind}` }, marker);
@@ -93,7 +95,7 @@ export function createMachineView(
     const title = el('title', {}, group);
     const label = `${f.substance}: ${model.components.find((c) => c.id === f.from)?.name} → ${model.components.find((c) => c.id === f.to)?.name}`;
     title.textContent = `${label} (not modeled in this run)`;
-    const base = el('path', { d, class: 'flow-base', 'marker-end': 'url(#arrow-idle)' }, group);
+    const base = el('path', { d, class: 'flow-base', 'marker-end': `url(#${idPrefix}-arrow-idle)` }, group);
     const dots = el('path', { d, class: 'flow-dots' }, group);
     flowPaths.set(f.id, { base, dots, title, offset: 0, label });
     base.dataset['kind'] = kind;
@@ -167,7 +169,7 @@ export function createMachineView(
         const kind = path.base.dataset['kind']!;
         group.classList.remove('idle');
         group.classList.add('live');
-        path.base.setAttribute('marker-end', `url(#arrow-${kind})`);
+        path.base.setAttribute('marker-end', `url(#${idPrefix}-arrow-${kind})`);
         const width = 1.5 + 9 * state.relative;
         path.base.style.strokeWidth = `${width}`;
         path.dots.style.strokeWidth = `${Math.max(2, width * 0.55)}`;

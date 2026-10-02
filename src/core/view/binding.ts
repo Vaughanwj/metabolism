@@ -20,11 +20,19 @@ export interface ObservableBinding {
   series: string;
 }
 
+/** Plain-language name for one of the engine's run totals, for comparison notes. */
+export interface TotalBinding {
+  key: string;
+  label: string;
+  unit: string;
+}
+
 export interface EngineBinding {
   engineId: string;
   flows: FlowBinding[];
   controls: ControlBinding[];
   observables: ObservableBinding[];
+  totals: TotalBinding[];
 }
 
 export type BindingResult = { ok: true; binding: EngineBinding } | { ok: false; errors: string[] };
@@ -83,6 +91,11 @@ export function loadBinding(raw: unknown, model: ReferenceModel): BindingResult 
     return { observableId, series: text(e, 'series', path, errors) };
   });
 
+  const totals = (raw['totals'] === undefined ? [] : entries(raw, 'totals', errors)).map((e, i): TotalBinding => {
+    const path = `totals[${i}]`;
+    return { key: text(e, 'key', path, errors), label: text(e, 'label', path, errors), unit: text(e, 'unit', path, errors) };
+  });
+
   for (const [name, ids] of [
     ['flows', flows.map((f) => f.flowId)],
     ['controls', controls.map((c) => c.controlId)],
@@ -96,5 +109,5 @@ export function loadBinding(raw: unknown, model: ReferenceModel): BindingResult 
   }
 
   if (errors.length > 0) return { ok: false, errors };
-  return { ok: true, binding: { engineId, flows, controls, observables } };
+  return { ok: true, binding: { engineId, flows, controls, observables, totals } };
 }

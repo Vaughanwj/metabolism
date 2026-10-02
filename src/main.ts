@@ -1,21 +1,37 @@
 import './ui/styles.css';
-import { dallaMan2007, loadBinding, loadParameterSet, loadReferenceModel, type Scenario } from './core';
+import {
+  loadBinding,
+  loadEnergyFactors,
+  loadParameterSet,
+  loadPreset,
+  loadReferenceModel,
+  loadScenarioRules,
+  type Preset,
+  type ScenarioRules,
+} from './core';
 import { bundledReferenceModel } from './adapters/bundled-reference-model';
 import { mountApp } from './ui/app';
 import binding from '../data/bindings/dalla-man-2007.json';
 import normalSubject from '../data/parameters/dalla-man-2007-normal.json';
+import rulesData from '../data/rules/dalla-man-2007.json';
+import energyData from '../data/reference/energy-factors.json';
 
-// Composition root: load and check the data, run the default scenario, mount the view.
+// Composition root: load and check the data, then mount the comparison page.
+
+const presetFiles = import.meta.glob<{ default: unknown }>('../data/presets/*.json', { eager: true });
+const PRESET_ORDER = ['same-calories-different-fuel', 'the-resistant-machine'];
 
 const root = document.querySelector<HTMLElement>('#app')!;
 
 function fail(title: string, errors: string[]): never {
-  const pre = document.createElement('pre');
-  pre.className = 'load-error';
-  pre.textContent = `${title}\n${errors.join('\n')}`;
-  root.replaceChildren(pre);
+  root.replaceChildren(Object.assign(document.createElement('pre'), { className: 'load-error', textContent: `${title}\n${errors.join('\n')}` }));
   throw new Error(title);
 }
+
+// Development only: look at the page before every citation is signed off, with a loud warning.
+// Production builds always refuse unverified values.
+const previewUnverified = import.meta.env.DEV && new URLSearchParams(location.search).has('preview-unverified');
+const unverified: string[] = [];
 
 const modelResult = loadReferenceModel(await bundledReferenceModel.load());
 if (!modelResult.ok) fail('The reference model failed to load.', modelResult.errors);
@@ -27,19 +43,37 @@ if (!bindingResult.ok) fail('The engine binding failed to load.', bindingResult.
 const params = loadParameterSet(normalSubject);
 if (!params.ok) fail('The parameter set was refused.', params.errors);
 
-const scenario: Scenario = {
-  id: 'default-breakfast',
-  profile: { age: 40, sex: 'female', heightCm: 170, weightKg: 78, insulinSensitivity: 1, activityLevel: 1.5 },
-  events: [{ time: 0, kind: 'meal', payload: { carbohydrateG: 78, proteinG: 0, fatG: 0, fiberG: 0 } }],
-  duration: 420,
-  timeStep: 0.1,
-  engineId: dallaMan2007.id,
-};
+let rules: ScenarioRules;
+const rulesResult = loadScenarioRules(rulesData);
+if (rulesResult.ok) rules = rulesResult.rules;
+else if (previewUnverified) {
+  rules = rulesData as unknown as ScenarioRules;
+  unverified.push(...rulesResult.errors.map((e) => `Input ranges: ${e}`));
+} else fail('The input ranges were refused. They need a checked citation before the simulator can run.', rulesResult.errors);
+
+const energyResult = loadEnergyFactors(energyData);
+if (!energyResult.ok) unverified.push(...energyResult.errors.map((e) => `Energy factors: ${e}`));
+
+const presets: Preset[] = [];
+for (const [path, mod] of Object.entries(presetFiles)) {
+  const p = loadPreset(mod.default);
+  if (!p.ok) fail(`Preset ${path} failed to load.`, p.errors);
+  presets.push(p.preset);
+}
+presets.sort((a, b) => PRESET_ORDER.indexOf(a.id) - PRESET_ORDER.indexOf(b.id));
+
+if (previewUnverified && unverified.length > 0) {
+  const banner = Object.assign(document.createElement('div'), { className: 'preview-banner', role: 'alert' });
+  banner.append(Object.assign(document.createElement('strong'), { textContent: 'Development preview with unchecked values. ' }), unverified.join(' · '));
+  document.body.prepend(banner);
+}
 
 mountApp(root, {
   model,
   binding: bindingResult.binding,
-  run: dallaMan2007.run(scenario, params.set),
-  scenarioLabel: 'A 78 g carbohydrate meal at 0 min, average normal subject',
+  params: params.set,
+  rules,
+  presets,
+  energy: energyResult.ok ? energyResult.factors : null,
   modelLabel: 'Dalla Man, Rizza & Cobelli 2007 meal model (curated SBML, BioModels BIOMD0000000379)',
 });

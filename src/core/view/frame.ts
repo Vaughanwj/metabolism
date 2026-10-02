@@ -51,23 +51,29 @@ function findSeries(run: RunResult, variable: string): TimeSeries {
   return s;
 }
 
-/** Precomputes what is constant over a run, then returns a function that builds each frame. */
-export function frameBuilder(run: RunResult, binding: EngineBinding): (t: number) => Frame {
-  if (binding.engineId !== run.engineId) {
-    throw new Error(`Binding is for ${binding.engineId} but the run is from ${run.engineId}`);
+/**
+ * Precomputes what is constant over a run, then returns a function that builds each frame.
+ * Pass every run being compared as scaleRuns so all are drawn on the same scale.
+ */
+export function frameBuilder(run: RunResult, binding: EngineBinding, scaleRuns: RunResult[] = [run]): (t: number) => Frame {
+  for (const r of [run, ...scaleRuns]) {
+    if (binding.engineId !== r.engineId) throw new Error(`Binding is for ${binding.engineId} but the run is from ${r.engineId}`);
   }
   const flows = binding.flows.map((b) => ({ ...b, s: findSeries(run, b.series) }));
   const controls = binding.controls.map((b) => {
-    const s = findSeries(run, b.series);
-    return { ...b, s, min: Math.min(...s.values), max: Math.max(...s.values) };
+    const all = scaleRuns.flatMap((r) => findSeries(r, b.series).values);
+    return { ...b, s: findSeries(run, b.series), min: Math.min(...all), max: Math.max(...all) };
   });
   const observables = binding.observables.map((b) => ({ ...b, s: findSeries(run, b.series) }));
 
   // One scale per unit so arrows carrying the same kind of quantity are comparable.
   const maxByUnit = new Map<string, number>();
-  for (const f of flows) {
-    const peak = Math.max(...f.s.values.map(Math.abs));
-    maxByUnit.set(f.s.unit, Math.max(maxByUnit.get(f.s.unit) ?? 0, peak));
+  for (const b of binding.flows) {
+    for (const r of scaleRuns) {
+      const s = findSeries(r, b.series);
+      const peak = Math.max(...s.values.map(Math.abs));
+      maxByUnit.set(s.unit, Math.max(maxByUnit.get(s.unit) ?? 0, peak));
+    }
   }
 
   return (t: number): Frame => {

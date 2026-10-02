@@ -203,3 +203,31 @@ Made on Oct 1, 2026:
    - The diagram routes protein (portal vein) and fat (lymph) qualitatively.
    - A label states that the model doesn't include how fat and protein slow digestion.
 5. **"Walk it off":** the meta-analysis ([PMC10036272](https://pmc.ncbi.nlm.nih.gov/articles/PMC10036272/)) is the acceptance check. The engine must show a smaller glucose rise with walking after a meal, strongest within 30 minutes. The exercise rates come from Romeres 2021, added to the meal model. This reading of Vaughan's "meta" answer was flagged to Vaughan for confirmation.
+
+## Milestone 4 findings (Oct 2, 2026)
+
+**Insulin resistance ("The resistant machine").**
+- The type 2 diabetes parameter list on MathWorks is **not used**, for three reasons:
+  - It assumes kidney glucose loss, which the curated SBML leaves out.
+  - It fixes the stomach-emptying constants for one meal size.
+  - It comes from a different implementation, which may lack the SBML's `part` factor.
+- Instead, the preset follows the open GIM paper by the same authors. GIM simulates type 2 diabetes by setting peripheral and hepatic insulin sensitivity ("V_max and k_p3") to 30% of normal.
+- Each run first settles to the model's own steady state for its settings (a 2-day warm-up).
+- The result: fasting glucose 114 against 95 mg/dL, and fasting insulin 83 against 30 pmol/L. Glucose rises further and takes about 100 min longer to come back, and the pancreas releases about 90% more insulin.
+- Because the pancreas is left at full strength, this shows insulin resistance with compensation, not full type 2 diabetes.
+- The reading of "V_max" is listed for sign-off in [citation-review-milestone-4.md](citation-review-milestone-4.md).
+
+**"Walk it off" is blocked.**
+- Romeres 2021's supplement (figshare 10.6084/m9.figshare.14178941, CC BY 4.0) has only model-comparison statistics. The parameter values aren't published, including `p4`, the delay of the insulin-dependent effect.
+- The paper gives only the size of the effects in healthy subjects:
+  - insulin-independent disposal: +67%, +97% and +74% across its three clamp visits
+  - insulin-dependent disposal: +40%, +10% and +22%
+- Options:
+  1. Ask the authors for the Model 5 estimates.
+  2. Use those percentages with an immediate effect (no delay), labeled as a simplification.
+  3. Use Frank 2021's explicitly published healthy-subject exercise terms, from walking after a mixed meal:
+     - liver glucose output rises by up to η = 4 with a 20-min lag
+     - muscle uptake rises by r = 860 mg/min per unit of exercise intensity
+
+     The fit is closer, but it means adapting terms from a different model structure.
+- The meta-analysis stays the acceptance check whichever option is chosen.

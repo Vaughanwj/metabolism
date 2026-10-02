@@ -38,7 +38,21 @@ function citation(c: Citation): HTMLElement {
   return p;
 }
 
-export function renderPanel(container: HTMLElement, model: ReferenceModel, componentId: string | null, frame: Frame | null): void {
+export interface LabeledFrame {
+  label: string;
+  frame: Frame;
+}
+
+/** "Baseline 3.64 · Variant 2.10 mg/kg/min" (or just the value when there is one run). */
+function values(frames: LabeledFrame[], pick: (f: Frame) => { value: number; unit: string } | undefined, digits: number): string | null {
+  const picked = frames.map((f) => ({ label: f.label, v: pick(f.frame) })).filter((x) => x.v !== undefined);
+  if (picked.length === 0) return null;
+  const unit = picked[0]!.v!.unit;
+  if (picked.length === 1) return `${picked[0]!.v!.value.toFixed(digits)} ${unit}`;
+  return `${picked.map((x) => `${x.label} ${x.v!.value.toFixed(digits)}`).join(' · ')} ${unit}`;
+}
+
+export function renderPanel(container: HTMLElement, model: ReferenceModel, componentId: string | null, frames: LabeledFrame[]): void {
   container.replaceChildren();
   if (!componentId) {
     container.append(h('p', 'Select a part of the machine to see what it does, what it needs, where it can be checked and what controls it.', 'hint'));
@@ -57,9 +71,9 @@ export function renderPanel(container: HTMLElement, model: ReferenceModel, compo
     const other = names.get(direction === 'in' ? f.from : f.to);
     span.append(h('strong', f.substance), ` ${direction === 'in' ? 'from' : 'to'} ${other}`);
     if (f.route) span.append(` via ${f.route}`);
-    const state = frame?.flows.get(f.id);
+    const state = frames[0]?.frame.flows.get(f.id);
     if (state) {
-      span.append(h('span', ` ${state.value.toFixed(2)} ${state.unit}`, 'value'));
+      span.append(h('span', ` ${values(frames, (fr) => fr.flows.get(f.id), 2)}`, 'value'));
       span.append(h('small', state.note, 'note'));
     } else {
       span.append(h('small', 'Not modeled in this run.', 'note'));
@@ -84,8 +98,8 @@ export function renderPanel(container: HTMLElement, model: ReferenceModel, compo
   list(checks, bill.observables.map((o) => {
     const span = h('span');
     span.append(h('strong', o.metric), ` (${o.unit}): ${o.measurementMethod}`);
-    const r = frame?.observables.get(o.id);
-    if (r) span.append(h('span', ` Model now: ${r.value.toFixed(1)} ${r.unit}`, 'value'));
+    const now = values(frames, (fr) => fr.observables.get(o.id), 1);
+    if (now) span.append(h('span', ` Model now: ${now}`, 'value'));
     return span;
   }), 'Nothing observable here in this version.');
 
@@ -93,8 +107,11 @@ export function renderPanel(container: HTMLElement, model: ReferenceModel, compo
   const controlItem = (c: (typeof bill.controlsActing)[number], produced: boolean) => {
     const span = h('span');
     span.append(h('strong', c.name), produced ? ' (made here) ' : ' ', c.effect);
-    const activity = frame?.controls.get(c.id);
-    span.append(h('small', activity === undefined ? 'Not modeled in this run.' : `Signal now: ${Math.round(activity * 100)}% of this run's range.`, 'note'));
+    const activity = values(frames, (fr) => {
+      const a = fr.controls.get(c.id);
+      return a === undefined ? undefined : { value: a * 100, unit: '%' };
+    }, 0);
+    span.append(h('small', activity === null ? 'Not modeled in this run.' : `Signal now, as a share of its range across the runs shown: ${activity}`, 'note'));
     return span;
   };
   list(controls, [

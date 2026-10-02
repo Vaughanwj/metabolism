@@ -15,6 +15,16 @@ A learner sets up a body and a scenario, changes one thing, and watches how the 
   - The machine view is generated from the reference model, with flows animated by an engine run and playback controls.
   - Clicking a component shows its five-layer bill of materials.
   - `data/bindings/` says which engine output drives which flow, and where the model lumps flows together.
+- **Milestone 4, in progress.** Built so far:
+  - the comparison page: baseline and variant diagrams on a shared scale, charts, glucose metrics and a generated "what changed and why" note
+  - scenario controls that allow only one changed variable
+  - the "Same calories, different fuel" and "The resistant machine" presets
+
+  Still waiting on:
+  - citation sign-off ([checklist](docs/citation-review-milestone-4.md)); until then the simulator refuses to run
+  - "Walk it off", which needs an exercise model decision (see the engine assessment)
+
+  In development, `?preview-unverified` shows the page before sign-off, with a warning banner.
 
 ## Develop
 
@@ -34,6 +44,9 @@ npm run dev
 | `src/adapters/` | Implementations of the core's ports |
 | `src/ui/` | The browser UI (a driving adapter): layout with dagre, SVG machine view, playback, side panel |
 | `data/bindings/` | Which engine output animates which flow, control and readout |
+| `data/rules/` | Each engine's allowed input ranges, with citations |
+| `data/presets/` | Preset comparisons: a base scenario plus exactly one change |
+| `data/reference/` | Cited reference values used for display, such as energy per gram |
 | `data/reference-model/` | The five-layer reference model as data. The diagram is generated from this |
 | `data/parameters/` | Cited parameter sets for each engine |
 | `data/sources/` | Machine-readable source models, e.g. the curated BioModels SBML |

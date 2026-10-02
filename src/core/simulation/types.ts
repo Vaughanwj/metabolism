@@ -68,6 +68,11 @@ export interface Scenario {
   duration: number;
   timeStep: number;
   engineId: string;
+  /**
+   * Minutes to run with no events before time zero, so the run starts from the model's own
+   * steady state for this profile rather than from the source's initial values.
+   */
+  warmUpMinutes?: number;
 }
 
 /** The one variable changed between baseline and variant. */

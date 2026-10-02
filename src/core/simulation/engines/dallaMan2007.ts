@@ -24,7 +24,7 @@ export const DALLA_MAN_2007_SOURCE: Citation = {
 };
 
 const ENGINE_ID = 'dalla-man-2007';
-const ENGINE_VERSION = '0.2.0';
+const ENGINE_VERSION = '0.3.0';
 
 export const LIMITATIONS = [
   'Glucose appearance is driven by carbohydrate only; protein and fat do not enter this model, and it does not capture how they slow digestion.',
@@ -146,6 +146,12 @@ export const dallaMan2007: SimulationEngine = {
     let x = [p.G_p0, p.G_t0, p.I_l0, p.I_p0, 0, 0, 0, p.I_10, p.I_d0, p.X0, p.I_po0, p.Y0];
     let lastMealMg = 0;
     const stepsPerMinute = Math.round(1 / h);
+
+    // Optional warm-up with no meals, so the run starts from this profile's steady state.
+    const warmUp = scenario.warmUpMinutes ?? 0;
+    if (warmUp < 0 || !Number.isInteger(warmUp)) throw new Error('warmUpMinutes must be a whole number of minutes');
+    const fasting = derivative(p, 0);
+    for (let step = 0; step < warmUp * stepsPerMinute; step++) x = rk4Step(fasting, step * h, x, h);
     const totalSteps = scenario.duration * stepsPerMinute;
     const series = OUTPUTS.map(([variable, unit]): TimeSeries => ({ variable, unit, times: [], values: [] }));
     const totals = { Ra: 0, EGP: 0, U_ii: 0, U_id: 0, S: 0 };

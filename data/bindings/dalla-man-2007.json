@@ -15,5 +15,12 @@
   "observables": [
     { "observableId": "blood-glucose", "series": "G" },
     { "observableId": "plasma-insulin", "series": "I" }
+  ],
+  "totals": [
+    { "key": "Ra", "label": "Meal glucose reaching the blood", "unit": "mg/kg" },
+    { "key": "EGP", "label": "Glucose made by the liver", "unit": "mg/kg" },
+    { "key": "U_id", "label": "Glucose taken up by muscle and fat (insulin-dependent)", "unit": "mg/kg" },
+    { "key": "U_ii", "label": "Glucose used by brain and red cells", "unit": "mg/kg" },
+    { "key": "S", "label": "Insulin released by the pancreas", "unit": "pmol/kg" }
   ]
 }

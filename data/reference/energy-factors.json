@@ -1,0 +1,25 @@
+{
+  "id": "general-atwater-factors",
+  "description": "Energy per gram of macronutrient, used only to show and check that preset meals have about the same energy. Not an input to any engine.",
+  "factors": [
+    {
+      "nutrient": "carbohydrate",
+      "kcalPerG": 4
+    },
+    {
+      "nutrient": "protein",
+      "kcalPerG": 4
+    },
+    {
+      "nutrient": "fat",
+      "kcalPerG": 9
+    }
+  ],
+  "citation": {
+    "source": "FAO. Food energy: methods of analysis and conversion factors. FAO Food and Nutrition Paper 77. Rome: FAO; 2003",
+    "locator": "Chapter 3, section 3.5.1: \"17 kJ/g (4.0 kcal/g) for protein, 37 kJ/g (9.0 kcal/g) for fat and 17 kJ/g (4.0 kcal/g) for carbohydrates\"",
+    "url": "https://www.fao.org/4/y5022e/y5022e04.htm",
+    "verifiedBy": "",
+    "verifiedOn": ""
+  }
+}
