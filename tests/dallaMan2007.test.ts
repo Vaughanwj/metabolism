@@ -113,7 +113,7 @@ describe('Dalla Man 2007 engine: behaviour', () => {
 
   it('records the model, version and parameter set used', () => {
     const result = dallaMan2007.run(mealScenario(45), params);
-    expect([result.engineId, result.engineVersion, result.parameterSetId]).toEqual(['dalla-man-2007', '0.1.0', 'dalla-man-2007-normal']);
+    expect([result.engineId, result.engineVersion, result.parameterSetId]).toEqual(['dalla-man-2007', '0.2.0', 'dalla-man-2007-normal']);
   });
 });
 

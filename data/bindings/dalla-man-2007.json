@@ -1,0 +1,19 @@
+{
+  "engineId": "dalla-man-2007",
+  "flows": [
+    { "flowId": "carb-absorption", "series": "Ra", "note": "Rate at which meal glucose appears in the blood. The model does not separate the gut, portal vein and liver steps, so all three show the same rate." },
+    { "flowId": "carb-to-liver", "series": "Ra", "note": "Rate at which meal glucose appears in the blood. The model does not separate the gut, portal vein and liver steps, so all three show the same rate." },
+    { "flowId": "carb-to-blood", "series": "Ra", "note": "Rate at which meal glucose appears in the blood. The model does not separate the gut, portal vein and liver steps, so all three show the same rate." },
+    { "flowId": "liver-glucose-output", "series": "EGP", "note": "The liver's own glucose production (endogenous glucose production), net of its uptake." },
+    { "flowId": "glucose-to-brain", "series": "U_ii", "note": "Insulin-independent glucose use: brain and red blood cells together. Constant in this model." },
+    { "flowId": "glucose-to-muscle", "series": "U_id", "note": "Insulin-dependent glucose uptake by muscle and fat combined. The model does not split it, so both arrows show the same total." },
+    { "flowId": "glucose-to-adipose", "series": "U_id", "note": "Insulin-dependent glucose uptake by muscle and fat combined. The model does not split it, so both arrows show the same total." }
+  ],
+  "controls": [
+    { "controlId": "insulin", "series": "I" }
+  ],
+  "observables": [
+    { "observableId": "blood-glucose", "series": "G" },
+    { "observableId": "plasma-insulin", "series": "I" }
+  ]
+}

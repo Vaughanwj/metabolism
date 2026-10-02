@@ -20,6 +20,7 @@
     { "id": "eating", "from": "intake", "to": "gut", "substance": "food" },
     { "id": "carb-absorption", "from": "gut", "to": "portal-vein", "substance": "glucose", "notes": "Carbohydrate is digested to glucose before absorption." },
     { "id": "carb-to-liver", "from": "portal-vein", "to": "liver", "substance": "glucose", "route": "portal vein", "notes": "The liver stores some as glycogen." },
+    { "id": "carb-to-blood", "from": "liver", "to": "blood", "substance": "glucose", "notes": "Meal glucose the liver passes on to the blood." },
     { "id": "protein-absorption", "from": "gut", "to": "portal-vein", "substance": "amino acids" },
     { "id": "protein-to-liver", "from": "portal-vein", "to": "liver", "substance": "amino acids", "route": "portal vein" },
     { "id": "amino-acids-to-blood", "from": "liver", "to": "blood", "substance": "amino acids", "notes": "Used for repair; can be converted to glucose." },

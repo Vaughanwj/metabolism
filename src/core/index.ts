@@ -4,4 +4,7 @@ export * from './simulation/types';
 export * from './simulation/parameters';
 export * from './simulation/integrate';
 export * from './simulation/engines/dallaMan2007';
+export * from './view/binding';
+export * from './view/frame';
+export * from './view/bill';
 export * from './ports';

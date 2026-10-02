@@ -24,7 +24,7 @@ export const DALLA_MAN_2007_SOURCE: Citation = {
 };
 
 const ENGINE_ID = 'dalla-man-2007';
-const ENGINE_VERSION = '0.1.0';
+const ENGINE_VERSION = '0.2.0';
 
 export const LIMITATIONS = [
   'Glucose appearance is driven by carbohydrate only; protein and fat do not enter this model, and it does not capture how they slow digestion.',
@@ -109,6 +109,8 @@ const OUTPUTS = [
   ['Ra', 'mg/kg/min'],
   ['EGP', 'mg/kg/min'],
   ['U', 'mg/kg/min'],
+  ['U_ii', 'mg/kg/min'],
+  ['U_id', 'mg/kg/min'],
   ['S', 'pmol/kg/min'],
   ['Q_sto', 'mg'],
   ['Q_gut', 'mg'],
@@ -150,7 +152,7 @@ export const dallaMan2007: SimulationEngine = {
 
     const record = (t: number) => {
       const f = fluxes(p, x, lastMealMg);
-      const values = [f.G, f.I, f.Ra, f.EGP, p.U_ii + f.Uid, f.S, x[Q_STO1]! + x[Q_STO2]!, x[Q_GUT]!];
+      const values = [f.G, f.I, f.Ra, f.EGP, p.U_ii + f.Uid, p.U_ii, f.Uid, f.S, x[Q_STO1]! + x[Q_STO2]!, x[Q_GUT]!];
       series.forEach((s, i) => {
         s.times.push(t);
         s.values.push(values[i]!);

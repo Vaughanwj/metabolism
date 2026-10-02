@@ -11,6 +11,10 @@ A learner sets up a body and a scenario, changes one thing, and watches how the 
 
 - **Milestone 1, done.** Core domain types, a reference-model loader with a citation check, and unit tests.
 - **Milestone 2, done.** The Dalla Man 2007 meal engine reproduces the curated BioModels SBML. Its parameters were verified on 2026-10-02 ([checklist](docs/citation-review-dalla-man-2007.md)).
+- **Milestone 3, done.**
+  - The machine view is generated from the reference model, with flows animated by an engine run and playback controls.
+  - Clicking a component shows its five-layer bill of materials.
+  - `data/bindings/` says which engine output drives which flow, and where the model lumps flows together.
 
 ## Develop
 
@@ -28,6 +32,8 @@ npm run dev
 | --- | --- |
 | `src/core/` | Pure domain: the reference model types and loader, simulation types and ports. Imports nothing outside itself; `tests/boundaries.test.ts` enforces this |
 | `src/adapters/` | Implementations of the core's ports |
+| `src/ui/` | The browser UI (a driving adapter): layout with dagre, SVG machine view, playback, side panel |
+| `data/bindings/` | Which engine output animates which flow, control and readout |
 | `data/reference-model/` | The five-layer reference model as data. The diagram is generated from this |
 | `data/parameters/` | Cited parameter sets for each engine |
 | `data/sources/` | Machine-readable source models, e.g. the curated BioModels SBML |
